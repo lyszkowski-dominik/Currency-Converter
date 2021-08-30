@@ -94,3 +94,34 @@ def check_rates():
 
 
 check_rates()
+
+
+
+''' import requests
+
+cur_money_change = input().lower()
+r = requests.get('https://www.floatrates.com/daily/{}.json'.format(cur_money_change))
+data = r.json()
+cache = dict()
+while True:
+    cur_to_change = input().lower()
+    if cur_to_change == "":
+        break
+    money_to_change = float(input())
+    if cur_money_change != 'usd':
+        cache['usd'] = data['usd']
+    if cur_money_change != 'eur':
+        cache['eur'] = data['eur']
+
+
+    print("Checking the cache...")
+
+    if cur_to_change in cache:
+        print("Oh! It is in the cache!")
+        print("You received {} {}.".format(round(data[cur_to_change.lower()]['rate'] * money_to_change, 2),
+                                           data[cur_to_change.lower()]['code']))
+    else:
+        print("Sorry, but it is not in the cache!")
+        print("You received {} {}.".format(round(data[cur_to_change.lower()]['rate'] * money_to_change, 2),
+                                           data[cur_to_change.lower()]['code']))
+        cache[cur_to_change] = data[cur_to_change] '''
