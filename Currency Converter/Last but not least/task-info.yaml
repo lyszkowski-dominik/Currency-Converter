@@ -783,32 +783,9 @@ files:
     0.004784555495703}}'
   learner_created: true
 feedback_link: https://hyperskill.org/projects/157/stages/822/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Exception in test #1
-
-    Traceback (most recent call last):
-      File "cconverter.py", line 89, in <module>
-        check_rates()
-      File "cconverter.py", line 83, in check_rates
-        currency_cache[curr_to_check] = current_rate
-    UnboundLocalError: local variable 'current_rate' referenced before assignment
-
-    Please find below the output of your program during this failed test.
-    Note that the '>' character indicates the beginning of the input line.
-
-    ---
-
-    > usd
-    > eur
-    > 20
-    Checking the cache...
-    Oh it is in the cache!
-    You received 17.00 EUR.
-    > nok
-    > 45
-    Checking the cache...
-    Sorry, but it is not in the cache!
-  time: Mon, 30 Aug 2021 07:14:17 UTC
+  message: Well done! You've finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Mon, 30 Aug 2021 08:33:57 UTC
 record: -1

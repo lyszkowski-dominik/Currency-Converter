@@ -1,5 +1,6 @@
 import requests
-import json
+
+currency_cache = {}
 
 
 def lowercase(to_lower):
@@ -7,11 +8,38 @@ def lowercase(to_lower):
     return to_lower
 
 
+def add_to_cache(curr_to_check, current_rate2):
+    currency_cache[curr_to_check] = current_rate2
+
+
+def check_currency_cache(curr_to_check, to_check):
+    i = 0
+    for a in currency_cache:
+        if a == curr_to_check:
+            print('Oh! It is in the cache!')
+            to_payout = currency_cache[curr_to_check] * to_check
+            print('You received %.2f %s.' % (to_payout, curr_to_check.upper()))
+            i += 1
+    if i == 0:
+        print('Sorry, but it is not in the cache!')
+        rate2 = to_cache(currency_rates, curr_to_check, to_check)
+        return rate2
+
+
+def to_cache(currency_rates3, curr_to_check, to_check):
+    for g in currency_rates3:
+        if g == curr_to_check:
+            f_rate2 = currency_rates3[g]
+            for h in f_rate2:
+                if h == 'rate':
+                    current_rate4 = f_rate2[h]
+                    to_receive = to_check * current_rate4
+                    print('You received %.2f %s.' % (to_receive, curr_to_check.upper()))
+                    return current_rate4
+
 
 usd = 'http://www.floatrates.com/daily/usd.json'
 eur = 'http://www.floatrates.com/daily/eur.json'
-currency_cache = {}
-
 
 
 #  taking necessary info to start searching
@@ -48,52 +76,21 @@ else:
 url = 'http://www.floatrates.com/daily/' + currency_to_exchange + '.json'
 currency_rates = requests.get(url).json()
 print('Checking the cache...')
-print('Oh it is in the cache!')
-for x in currency_rates:
-    if x == target_currency:
-        f_rate = currency_rates[x]
-        for y in f_rate:
-            if y == 'rate':
-                current_rate = f_rate[y]
-                to_receive = amount_to_exchange * current_rate
-                print('You received %.2f %s.' % (to_receive, target_currency.upper()))
+rate = check_currency_cache(target_currency, amount_to_exchange)
+add_to_cache(target_currency, rate)
+
 
 def check_rates():
 
     while True:
         curr_to_check = lowercase(input())
-        if len(curr_to_check) > 0 :
+        if len(curr_to_check) > 0:
             to_check = float(input())
             print('Checking the cache...')
-        for a in currency_cache:
-                if a == curr_to_check:
-                    print('Oh! It is in the cache!')
-                    to_payout = currency_cache[curr_to_check] * to_check
-                    print('You received %.2f %s.' % (to_payout, curr_to_check.upper()))
-                else:
-                    print('Sorry, but it is not in the cache!')
-                    for b in currency_rates:
-                        if b == curr_to_check:
-                            f_rate = currency_rates[b]
-                            for c in f_rate:
-                                if c == 'rate':
-                                    current_rate = f_rate[c]
-                                    to_receive = to_check * current_rate
-                                    print('You received %.2f %s.' % (to_receive, curr_to_check.upper()))
-                                currency_cache[curr_to_check] = current_rate
-                                check_rates()
-
-
+            rate3 = check_currency_cache(curr_to_check, to_check)
+            add_to_cache(curr_to_check, rate3)
+        else:
+            break
 
 
 check_rates()
-'''
-import requests
-import json
-
-code = input()
-url = 'http://www.floatrates.com/daily/' + code + '.json'
-rates = requests.get(url).json()
-print(rates['usd'])
-print(rates['eur'])
-'''
